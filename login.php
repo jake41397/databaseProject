@@ -1,0 +1,135 @@
+<?php
+   include("config.php");
+
+   if($_SERVER["REQUEST_METHOD"] == "POST")
+   {
+      // email and password sent from form
+      $myemail = mysqli_real_escape_string($db,$_POST['email']);
+      $mypassword = mysqli_real_escape_string($db,$_POST['password']);
+
+      $sql = "SELECT email FROM u_login WHERE Email = '$myemail' AND Password = '$mypassword'";
+      $result = mysqli_query($db,$sql);
+      //$row = mysqli_fetch_array($result,MYSQLI_ASSOC);
+      //$active = $row['active'];
+      $count = mysqli_num_rows($result);
+
+      if($count == 1)
+      {
+        echo "Logged in!";
+        $_SESSION['loggedin'] = true;
+        $_SESSION['username'] = $myemail;
+      }
+      else
+      {
+        echo "Incorrect Username or Password.";
+        $_SESSION['logged'] = false;
+      }
+    }
+
+    if(isset($_SESSION['url']))
+      $url = $_SESSION['url'];
+    else
+      $url = "localhost/surveyToday/index.php";
+?>
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Surveyor | Login</title>
+    <link href="css/bootstrap.min.css" rel="stylesheet" />
+    <link rel="stylesheet" type="text/css" href="css/main.css">
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+  </head>
+
+  <body>
+
+    <!-- navbar -->
+     <nav class="navbar navbar-expand-lg fixed-top ">
+       <a class="navbar-brand" href="index.php">Home</a>
+       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+         <span class="navbar-toggler-icon"></span>
+       </button>
+       <p class="navbar-brand"><?php if($_SESSION['loggedin']) echo "Welcome!"; else echo "";?></p>
+
+       <div class="collapse navbar-collapse " id="navbarSupportedContent">
+       <ul class="navbar-nav mr-4">
+         <li class="nav-item">
+             <a class="nav-link" id = "hidden" data-value="name" href="surveys.php">Welcome INSERT NAME</a></li>
+         <li class="nav-item">
+             <a class="nav-link" data-value="survey" href="surveys.php">Survey</a></li>
+         <li class="nav-item">
+           <a class="nav-link " data-value="team" href="team.php">Team</a></li>
+         <li class="nav-item">
+           <a class="nav-link " data-value="login"href="login.php"><?php if($_SESSION['logged']) echo "Logout"; else echo "Login";?></a></li>
+         </ul>
+       </div>
+     </nav>
+
+     <header class="header">
+       <div class="overlay"></div>
+       <div class="container">
+       </br>
+       </br>
+         <div class="row">
+          <div class="col-sm-6">
+             <div class="description ">
+               <h1>Login: </h1>
+               <form method = "post" action = "">
+                 <div class="form-group">
+                    <label for="usr">Email:</label>
+                    <input type="text" name="email" value="" placeholder="Email" class="form-control" id="usr">
+                  </div>
+                  <div class="form-group">
+                    <label for="pwd">Password:</label>
+                    <input type="password"  name="password" value="" placeholder="Password" class="form-control" id="pwd">
+                  </div>
+                  <button id="myBtn" name="commit" value="Login" >Submit</button>
+              </form>
+             </div>
+          </div>
+
+          <div class="col-sm-6">
+            <div class="description">
+              <form method = "post" action = "register.php">
+                <h1>Sign Up: </h1>
+                <div class="form-group">
+                   <label for="email">Email:</label>
+                   <input type="text" name="email" value="" placeholder="Email" class="form-control" id="email">
+                 </div>
+                 <div class="form-group">
+                   <label for="pwd">Password:</label>
+                   <input type="password" name="password" value="" placeholder="Password" class="form-control" id="pwd">
+                 </div>
+                 <button id="signUp" name="commit" value="Register" >Submit</button>
+               </form>
+            </div>
+          </div>
+        </div>
+
+         <script type ="text/javascript">
+            var pwd = document.getElementById("pwd");
+            var usr = document.getElementById("usr");
+
+            pwd.addEventListener("keyup", function(event)
+            {
+              if (event.keyCode === 13)
+              {
+                event.preventDefault();
+                document.getElementById("myBtn").click();
+              }
+            });
+          </script>
+       </div>
+     </header>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script type="text/javascript" src='js/main.js'></script>
+  </body>
+</html>
