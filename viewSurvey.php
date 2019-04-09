@@ -1,4 +1,4 @@
-<?php session_start();?>
+<?php session_start(); ?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -42,11 +42,8 @@
        <div class="overlay"></div>
        <div class="container">
          <div class="description ">
-           <h1>Hello, Welcome To Our Official Website
+           <h1>View Your Surveys Here:
              <p>Start making your survey today!</p>
-             <button class="btn btn-outline-secondary btn-lg" onclick="location.href='login.php';">Sign Up</button>
-             <p></br>Or</p>
-             <button class="btn btn-outline-secondary btn-lg" onclick="location.href='login.php';">Log In</button>
            </h1>
          </div>
        </div>

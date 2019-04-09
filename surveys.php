@@ -1,3 +1,7 @@
+<?php session_start();
+      //$_SESSION['loggedin'] = false;
+?>
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -20,6 +24,7 @@
        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
          <span class="navbar-toggler-icon"></span>
        </button>
+       <p class="navbar-brand"><?php if($_SESSION['loggedin']) echo "Welcome!"; else echo "";?></p>
 
        <div class="collapse navbar-collapse " id="navbarSupportedContent">
        <ul class="navbar-nav mr-4">
@@ -30,7 +35,7 @@
          <li class="nav-item">
            <a class="nav-link " data-value="team" href="team.php">Team</a></li>
          <li class="nav-item">
-           <a class="nav-link " data-value="login"href="login.php">Login</a></li>
+           <a class="nav-link " data-value="login" <?php if($_SESSION['loggedin']) echo "action=logout.php"; else echo "href=login.php";?>><?php if($_SESSION['loggedin']) echo "Logout"; else echo "Login";?></a></li>
          </ul>
        </div>
      </nav>
@@ -43,17 +48,19 @@
             <h1>Would You Like To Do?</h1>
           </div>
         </div>
-
      <!-- Survey Boxes Section -->
      <div class="surveybox">
        <div class="container">
          <div class="row">
            <div class="col-lg-3 col-md-3 col-sm-12 item">
+             <a href=<?php if($_SESSION['loggedin']) echo "surveyPage.php"; else echo "login.php";?>>
               <img src="images/createSurveyBox.jpg" class="img-fluid" alt="Create">
               <div class="des">Create a Survey</div>
               <!-- <span class="text-muted">Create</span> -->
+            </a>
             </div>
             <div class="col-lg-3 col-md-3 col-sm-12 item">
+              <a href=<?php if($_SESSION['loggedin']) echo "viewSurvey.php"; else echo "login.php";?>>
               <img src="images/viewSurveyBox.jpg" class="img-fluid" alt="View">
               <div class="des">View a Survey</div>
               <!-- <span class="text-muted">View</span> -->
@@ -61,7 +68,6 @@
            </div>
         </div>
      </div>
-
    </div>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>

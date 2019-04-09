@@ -3,26 +3,24 @@
 
    if($_SERVER["REQUEST_METHOD"] == "POST")
    {
-      // email and password sent from form
-      $myemail = mysqli_real_escape_string($db,$_POST['email']);
-      $mypassword = mysqli_real_escape_string($db,$_POST['password']);
+      $myemail = $_POST['email'];
+      $mypassword = $_POST['password'];
 
       $sql = "SELECT email FROM u_login WHERE Email = '$myemail' AND Password = '$mypassword'";
       $result = mysqli_query($db,$sql);
-      //$row = mysqli_fetch_array($result,MYSQLI_ASSOC);
-      //$active = $row['active'];
       $count = mysqli_num_rows($result);
 
       if($count == 1)
       {
-        echo "Logged in!";
         $_SESSION['loggedin'] = true;
-        $_SESSION['username'] = $myemail;
+        echo "Logged in!";
+        //$_SESSION['loggedin'] = true;
+        //$_SESSION['username'] = $myemail;
       }
       else
       {
         echo "Incorrect Username or Password.";
-        $_SESSION['logged'] = false;
+        //$_SESSION['loggedin'] = false;
       }
     }
 
@@ -48,7 +46,6 @@
   </head>
 
   <body>
-
     <!-- navbar -->
      <nav class="navbar navbar-expand-lg fixed-top ">
        <a class="navbar-brand" href="index.php">Home</a>
@@ -66,7 +63,7 @@
          <li class="nav-item">
            <a class="nav-link " data-value="team" href="team.php">Team</a></li>
          <li class="nav-item">
-           <a class="nav-link " data-value="login"href="login.php"><?php if($_SESSION['logged']) echo "Logout"; else echo "Login";?></a></li>
+           <a class="nav-link " data-value="login"href="login.php"><?php //if($_SESSION['logged']) echo "Logout"; else echo "Login";?></a></li>
          </ul>
        </div>
      </nav>
@@ -83,7 +80,7 @@
                <form method = "post" action = "">
                  <div class="form-group">
                     <label for="usr">Email:</label>
-                    <input type="text" name="email" value="" placeholder="Email" class="form-control" id="usr">
+                    <input type="text" name="email" value="" placeholder="Email" class="form-control" id="email">
                   </div>
                   <div class="form-group">
                     <label for="pwd">Password:</label>
@@ -92,6 +89,12 @@
                   <button id="myBtn" name="commit" value="Login" >Submit</button>
               </form>
              </div>
+             <?php
+                if(isset($msg))
+                {  // Check if $msg is not empty
+                    echo '<div class="statusmsg">'.$msg.'</div>'; // Display our message and wrap it with a div with the class "statusmsg".
+                }
+             ?>
           </div>
 
           <div class="col-sm-6">
@@ -114,7 +117,7 @@
 
          <script type ="text/javascript">
             var pwd = document.getElementById("pwd");
-            var usr = document.getElementById("usr");
+            var usr = document.getElementById("email");
 
             pwd.addEventListener("keyup", function(event)
             {
