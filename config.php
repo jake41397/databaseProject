@@ -7,4 +7,14 @@
 
    session_start(); // starts the session
    $_SESSION['url'] = $_SERVER['REQUEST_URI']; // i.e. "about.php"
+   
+   // Check connection
+   if ($db->connect_error)
+   {
+       die("Connection failed: " . $db->connect_error);
+       echo("<script>console.log('Could not connect to database');</script>");
+   } 
+
+   echo "Connected successfully";
+   echo("<script>console.log('Successfully connected to  database');</script>");
 ?>
