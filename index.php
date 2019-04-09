@@ -26,7 +26,7 @@
        <div class="collapse navbar-collapse " id="navbarSupportedContent">
        <ul class="navbar-nav mr-4">
          <li class="nav-item">
-             <a class="nav-link" id = "hidden" data-value="name" href="surveys.php">Welcome INSERT NAME</a></li>
+             <a class="nav-link" id = "hidden" data-value="name" href="surveyPage.php">Welcome INSERT NAME</a></li>
          <li class="nav-item">
              <a class="nav-link" data-value="survey" href="surveys.php">Survey</a></li>
          <li class="nav-item">
