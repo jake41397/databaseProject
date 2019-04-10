@@ -129,154 +129,181 @@
               {
                 var x = value;
 
-                if(x == 1)
+                if(x == 0)
                 {
-                  // Fetching HTML Elements in Variables by ID.
-                  var x = document.getElementById("form_sample" + question);
-                  var createform = document.createElement('form'); // Create New Element Form
-                  createform.setAttribute("action", ""); // Setting Action Attribute on Form
-                  createform.setAttribute("method", "post"); // Setting Method Attribute on Form
-                  x.appendChild(createform);
+                  if ( $('#form_sample' + question).text().length == 0 )
+                  {
 
-                /*  var heading = document.createElement('h2'); // Heading of Form
-                  heading.innerHTML = "Contact Form ";
-                  createform.appendChild(heading);*/
+                  }
+                  else
+                  {
+                    $('#form_sample' + question).empty();
+                  }
+                }
+                else if(x == 1)
+                {
+                  if ( $('#form_sample' + question).text().length == 0 )
+                  {
+                    // Fetching HTML Elements in Variables by ID.
+                    var x = document.getElementById("form_sample" + question);
+                    var createform = document.createElement('form'); // Create New Element Form
+                    createform.setAttribute("action", ""); // Setting Action Attribute on Form
+                    createform.setAttribute("method", "post"); // Setting Method Attribute on Form
+                    x.appendChild(createform);
 
-                  var line = document.createElement('hr'); // Giving Horizontal Row After Heading
-                  createform.appendChild(line);
+                  /*  var heading = document.createElement('h2'); // Heading of Form
+                    heading.innerHTML = "Contact Form ";
+                    createform.appendChild(heading);*/
 
-                  var linebreak = document.createElement('br');
-                  createform.appendChild(linebreak);
+                    var line = document.createElement('hr'); // Giving Horizontal Row After Heading
+                    createform.appendChild(line);
 
-                  var questionlabel = document.createElement('label'); // Create Label for Name Field
-                  questionlabel.innerHTML = "Question : "; // Set Field Labels
-                  createform.appendChild(questionlabel);
+                    var linebreak = document.createElement('br');
+                    createform.appendChild(linebreak);
 
-                  var inputelement = document.createElement('input'); // Create Input Field for Name
-                  inputelement.setAttribute("type", "text");
-                  inputelement.setAttribute("name", "dname");
-                  createform.appendChild(inputelement);
+                    var questionlabel = document.createElement('label'); // Create Label for Name Field
+                    questionlabel.innerHTML = "Question : "; // Set Field Labels
+                    createform.appendChild(questionlabel);
 
-                  var linebreak = document.createElement('br');
-                  createform.appendChild(linebreak);
+                    var inputelement = document.createElement('input'); // Create Input Field for Name
+                    inputelement.setAttribute("type", "text");
+                    inputelement.setAttribute("name", "dname");
+                    createform.appendChild(inputelement);
 
-                  var messagelabel = document.createElement('label'); // Append Textarea
-                  messagelabel.innerHTML = "Answer : ";
-                  createform.appendChild(messagelabel);
+                    var linebreak = document.createElement('br');
+                    createform.appendChild(linebreak);
 
-                  var linebreak2 = document.createElement('br');
-                  createform.appendChild(linebreak2);
+                    var messagelabel = document.createElement('label'); // Append Textarea
+                    messagelabel.innerHTML = "Answer : ";
+                    createform.appendChild(messagelabel);
 
-                  var radioelement = document.createElement('input');
-                  radioelement.setAttribute("id", "rating1");
-                  radioelement.setAttribute("type", "radio");
-                  radioelement.setAttribute("value", "1");
-                  createform.appendChild(radioelement);
+                    var linebreak2 = document.createElement('br');
+                    createform.appendChild(linebreak2);
 
-                  var radiolabel1 = document.createElement('label');
-                  radiolabel1.setAttribute("for", "rating1");
-                  radiolabel1.innerHTML = "1 ";
-                  createform.appendChild(radiolabel1);
+                    var radioelement = document.createElement('input');
+                    radioelement.setAttribute("id", "rating1");
+                    radioelement.setAttribute("type", "radio");
+                    radioelement.setAttribute("value", "1");
+                    createform.appendChild(radioelement);
 
-                  var radioelement2 = document.createElement('input');
-                  radioelement2.setAttribute("id", "rating2");
-                  radioelement2.setAttribute("type", "radio");
-                  radioelement2.setAttribute("value", "2");
-                  createform.appendChild(radioelement2);
+                    var radiolabel1 = document.createElement('label');
+                    radiolabel1.setAttribute("for", "rating1");
+                    radiolabel1.innerHTML = "1 ";
+                    createform.appendChild(radiolabel1);
 
-                  var radiolabel2 = document.createElement('label');
-                  radiolabel2.setAttribute("for", "rating2");
-                  radiolabel2.innerHTML = "2 ";
-                  createform.appendChild(radiolabel2);
+                    var radioelement2 = document.createElement('input');
+                    radioelement2.setAttribute("id", "rating2");
+                    radioelement2.setAttribute("type", "radio");
+                    radioelement2.setAttribute("value", "2");
+                    createform.appendChild(radioelement2);
 
-                  var radioelement3 = document.createElement('input');
-                  radioelement3.setAttribute("id", "rating3");
-                  radioelement3.setAttribute("type", "radio");
-                  radioelement3.setAttribute("value", "3");
-                  createform.appendChild(radioelement3);
+                    var radiolabel2 = document.createElement('label');
+                    radiolabel2.setAttribute("for", "rating2");
+                    radiolabel2.innerHTML = "2 ";
+                    createform.appendChild(radiolabel2);
 
-                  var radiolabel3 = document.createElement('label');
-                  radiolabel3.setAttribute("for", "rating3");
-                  radiolabel3.innerHTML = "3 ";
-                  createform.appendChild(radiolabel3);
+                    var radioelement3 = document.createElement('input');
+                    radioelement3.setAttribute("id", "rating3");
+                    radioelement3.setAttribute("type", "radio");
+                    radioelement3.setAttribute("value", "3");
+                    createform.appendChild(radioelement3);
 
-                  var radioelement4 = document.createElement('input');
-                  radioelement4.setAttribute("id", "rating4");
-                  radioelement4.setAttribute("type", "radio");
-                  radioelement4.setAttribute("value", "4");
-                  createform.appendChild(radioelement4);
+                    var radiolabel3 = document.createElement('label');
+                    radiolabel3.setAttribute("for", "rating3");
+                    radiolabel3.innerHTML = "3 ";
+                    createform.appendChild(radiolabel3);
 
-                  var radiolabel4 = document.createElement('label');
-                  radiolabel4.setAttribute("for", "rating3");
-                  radiolabel4.innerHTML = "4 ";
-                  createform.appendChild(radiolabel4);
+                    var radioelement4 = document.createElement('input');
+                    radioelement4.setAttribute("id", "rating4");
+                    radioelement4.setAttribute("type", "radio");
+                    radioelement4.setAttribute("value", "4");
+                    createform.appendChild(radioelement4);
 
-                  var radioelement5 = document.createElement('input');
-                  radioelement5.setAttribute("id", "rating5");
-                  radioelement5.setAttribute("type", "radio");
-                  radioelement5.setAttribute("value", "5");
-                  createform.appendChild(radioelement5);
+                    var radiolabel4 = document.createElement('label');
+                    radiolabel4.setAttribute("for", "rating3");
+                    radiolabel4.innerHTML = "4 ";
+                    createform.appendChild(radiolabel4);
 
-                  var radiolabel5 = document.createElement('label');
-                  radiolabel5.setAttribute("for", "rating5");
-                  radiolabel5.innerHTML = "5 ";
-                  createform.appendChild(radiolabel5);
+                    var radioelement5 = document.createElement('input');
+                    radioelement5.setAttribute("id", "rating5");
+                    radioelement5.setAttribute("type", "radio");
+                    radioelement5.setAttribute("value", "5");
+                    createform.appendChild(radioelement5);
 
-                  var messagebreak = document.createElement('br');
-                  createform.appendChild(messagebreak);
+                    var radiolabel5 = document.createElement('label');
+                    radiolabel5.setAttribute("for", "rating5");
+                    radiolabel5.innerHTML = "5 ";
+                    createform.appendChild(radiolabel5);
 
-                  /*var submitelement = document.createElement('input'); // Append Submit Button
-                  submitelement.setAttribute("type", "submit");
-                  submitelement.setAttribute("name", "dsubmit");
-                  submitelement.setAttribute("value", "Submit");
-                  createform.appendChild(submitelement);*/
+                    var messagebreak = document.createElement('br');
+                    createform.appendChild(messagebreak);
 
-                  x.insertbefore(createform, x.childNodes[0]);
+                    /*var submitelement = document.createElement('input'); // Append Submit Button
+                    submitelement.setAttribute("type", "submit");
+                    submitelement.setAttribute("name", "dsubmit");
+                    submitelement.setAttribute("value", "Submit");
+                    createform.appendChild(submitelement);*/
+
+                    x.insertbefore(createform, x.childNodes[0]);
+                  }
+                  else
+                  {
+                    $('#form_sample' + question).empty();
+                    myFunction(value, question);
+                  }
                 }
                 else if (x == 2)
                 {
-                  // Fetching HTML Elements in Variables by ID.
-                  var x = document.getElementById("form_sample" + question);
-                  var createform = document.createElement('form'); // Create New Element Form
-                  createform.setAttribute("action", ""); // Setting Action Attribute on Form
-                  createform.setAttribute("method", "post"); // Setting Method Attribute on Form
-                  x.appendChild(createform);
+                  if ( $('#form_sample' + question).text().length == 0 )
+                  {
+                    // Fetching HTML Elements in Variables by ID.
+                    var x = document.getElementById("form_sample" + question);
+                    var createform = document.createElement('form'); // Create New Element Form
+                    createform.setAttribute("action", ""); // Setting Action Attribute on Form
+                    createform.setAttribute("method", "post"); // Setting Method Attribute on Form
+                    x.appendChild(createform);
 
-                  var line = document.createElement('hr'); // Giving Horizontal Row After Heading
-                  createform.appendChild(line);
+                    var line = document.createElement('hr'); // Giving Horizontal Row After Heading
+                    createform.appendChild(line);
 
-                  var linebreak = document.createElement('br');
-                  createform.appendChild(linebreak);
+                    var linebreak = document.createElement('br');
+                    createform.appendChild(linebreak);
 
-                  var questionlabel = document.createElement('label'); // Create Label for Name Field
-                  questionlabel.innerHTML = "Question : "; // Set Field Labels
-                  createform.appendChild(questionlabel);
+                    var questionlabel = document.createElement('label'); // Create Label for Name Field
+                    questionlabel.innerHTML = "Question : "; // Set Field Labels
+                    createform.appendChild(questionlabel);
 
-                  var inputelement = document.createElement('input'); // Create Input Field for Name
-                  inputelement.setAttribute("type", "text");
-                  inputelement.setAttribute("name", "dname");
-                  createform.appendChild(inputelement);
+                    var inputelement = document.createElement('input'); // Create Input Field for Name
+                    inputelement.setAttribute("type", "text");
+                    inputelement.setAttribute("name", "dname");
+                    inputelement.setAttribute("size", "42");
+                    createform.appendChild(inputelement);
 
-                  var linebreak = document.createElement('br');
-                  createform.appendChild(linebreak);
+                    var linebreak = document.createElement('br');
+                    createform.appendChild(linebreak);
 
-                  var messagelabel = document.createElement('label'); // Append Textarea
-                  messagelabel.innerHTML = "Answer : ";
-                  createform.appendChild(messagelabel);
+                    var messagelabel = document.createElement('label'); // Append Textarea
+                    messagelabel.innerHTML = "Answer : ";
+                    createform.appendChild(messagelabel);
 
-                  var texareaelement = document.createElement('textarea');
-                  texareaelement.setAttribute("name", "dmessage");
-                  texareaelement.setAttribute("maxlength", "200");
-                  createform.appendChild(texareaelement);
+                    var texareaelement = document.createElement('textarea');
+                    texareaelement.setAttribute("name", "dmessage");
+                    texareaelement.setAttribute("maxlength", "200");
+                    texareaelement.setAttribute("cols", "45");
+                    texareaelement.setAttribute("rows", "3");
+                    createform.appendChild(texareaelement);
 
-                  var messagebreak = document.createElement('br');
-                  createform.appendChild(messagebreak);
+                    var messagebreak = document.createElement('br');
+                    createform.appendChild(messagebreak);
 
-                  x.insertbefore(createform, x.childNodes[0]);
+                    x.insertbefore(createform, x.childNodes[0]);
+                  }
+                  else
+                  {
+                    $('#form_sample' + question).empty();
+                    myFunction(value, question);
+                  }
                 }
-                else
-                  ;
-
               }
           </script>
 
