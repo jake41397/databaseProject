@@ -42,11 +42,11 @@
        <div class="overlay"></div>
        <div class="container">
          <div class="description ">
-           <h1>Hello, Welcome To Our Official Website
+           <h1>Welcome to Survey Today!
              <?php
              if(!isset($_SESSION['loggedin']))
              {
-               echo "<p>Start making your survey today!</p>
+               echo "<p>Log in to start making your surveys, today!</p>
                      <button class='btn btn-outline-secondary btn-lg' onclick=\"location.href='login.php';\">Sign Up</button>
                       <p></br>Or</p>
                       <button class='btn btn-outline-secondary btn-lg' onclick=\"location.href='login.php';\">Log In</button>";
