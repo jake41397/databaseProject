@@ -42,7 +42,7 @@
       </br>
       </br>
       </br>
-      <form method="post" action="">
+      <form method="post" action="" class="formbkg">
       <label for="title">Title:</label>
       <input type="text" name="title" value="" placeholder="Title" class="form-control" id="title">
 
@@ -55,7 +55,6 @@
       <label for="start">End Date</label>
       <input type="date" id="end" name="surveyEnd" value="2019-03-18"  min="2019-03-18" max="2020-12-31">
 
-       <div class="formbkg">
        </br>
        </br>
            <p>Question 1:</p>
@@ -122,7 +121,6 @@
       <input type="submit" value="Submit">
     </br>
     </br>
-    </div>
   </form>
   </div>
 
