@@ -266,6 +266,7 @@
 
                   var texareaelement = document.createElement('textarea');
                   texareaelement.setAttribute("name", "dmessage");
+                  texareaelement.setAttribute("maxlength", "200");
                   createform.appendChild(texareaelement);
 
                   var messagebreak = document.createElement('br');
