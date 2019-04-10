@@ -64,7 +64,7 @@
          <li class="nav-item">
            <a class="nav-link " data-value="team" href="team.php">Team</a></li>
          <li class="nav-item">
-           <a class="nav-link " data-value="login"href="login.php"><?php //if($_SESSION['logged']) echo "Logout"; else echo "Login";?></a></li>
+           <a class="nav-link " data-value="login"href="login.php"><?php if($_SESSION['logged']) echo "Logout"; else echo "Login";?></a></li>
          </ul>
        </div>
      </nav>
