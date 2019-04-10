@@ -177,7 +177,7 @@
 
                   var radiolabel1 = document.createElement('label');
                   radiolabel1.setAttribute("for", "rating1");
-                  radiolabel1.innerHTML = "1: ";
+                  radiolabel1.innerHTML = "1 ";
                   createform.appendChild(radiolabel1);
 
                   var radioelement2 = document.createElement('input');
@@ -188,7 +188,7 @@
 
                   var radiolabel2 = document.createElement('label');
                   radiolabel2.setAttribute("for", "rating2");
-                  radiolabel1.innerHTML = "2: ";
+                  radiolabel2.innerHTML = "2 ";
                   createform.appendChild(radiolabel2);
 
                   var radioelement3 = document.createElement('input');
@@ -199,8 +199,30 @@
 
                   var radiolabel3 = document.createElement('label');
                   radiolabel3.setAttribute("for", "rating3");
-                  radiolabel1.innerHTML = "3: ";
+                  radiolabel3.innerHTML = "3 ";
                   createform.appendChild(radiolabel3);
+
+                  var radioelement4 = document.createElement('input');
+                  radioelement4.setAttribute("id", "rating4");
+                  radioelement4.setAttribute("type", "radio");
+                  radioelement4.setAttribute("value", "4");
+                  createform.appendChild(radioelement4);
+
+                  var radiolabel4 = document.createElement('label');
+                  radiolabel4.setAttribute("for", "rating3");
+                  radiolabel4.innerHTML = "4 ";
+                  createform.appendChild(radiolabel4);
+
+                  var radioelement5 = document.createElement('input');
+                  radioelement5.setAttribute("id", "rating5");
+                  radioelement5.setAttribute("type", "radio");
+                  radioelement5.setAttribute("value", "5");
+                  createform.appendChild(radioelement5);
+
+                  var radiolabel5 = document.createElement('label');
+                  radiolabel5.setAttribute("for", "rating5");
+                  radiolabel5.innerHTML = "5 ";
+                  createform.appendChild(radiolabel5);
 
                   var messagebreak = document.createElement('br');
                   createform.appendChild(messagebreak);
@@ -250,12 +272,6 @@
 
                   var messagebreak = document.createElement('br');
                   createform.appendChild(messagebreak);
-
-                  /*var submitelement = document.createElement('input'); // Append Submit Button
-                  submitelement.setAttribute("type", "submit");
-                  submitelement.setAttribute("name", "dsubmit");
-                  submitelement.setAttribute("value", "Submit");
-                  createform.appendChild(submitelement);*/
 
                   x.insertbefore(createform, x.childNodes[0]);
                 }
