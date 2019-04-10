@@ -7,10 +7,7 @@ $email = $_POST['email'];
 $password =  $_POST['password'];
 }
 
-$email = $_POST['email'];
-$password = $_POST['password'];
-
-$query = "SELECT email FROM Users WHERE email = '$email'";
+$query = "SELECT * FROM users WHERE email = '$email'";
 echo json_Encode($query);
 $result = mysqli_query($db,$query);
 
@@ -28,7 +25,7 @@ if($result->num_rows > 0)
   else
   {
     echo("<script>console.log('Attempting to insert into Users table and send email');</script>");
-    $query = "INSERT INTO Users (email, password, hash, active) VALUES ('$email','$password', 0, false)";
+    $query = "INSERT INTO users (email, password, hash, active) VALUES ('$email','$password', 0, 0)";
     $result = mysqli_query($db, $query);
     
     if (!$result)
