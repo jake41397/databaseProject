@@ -27,7 +27,7 @@
        <div class="collapse navbar-collapse " id="navbarSupportedContent">
        <ul class="navbar-nav mr-4">
          <li class="nav-item">
-             <a class="nav-link" id = "hidden" data-value="name" href="surveys.php">Welcome INSERT NAME</a></li>
+         <a class="nav-link" id = "hidden" data-value="name" <?php if(isset($_SESSION['loggedin'])) echo "href=surveys.php"; else echo "href=login.php";?>><?php if (!isset($_SESSION['loggedin'])) echo ""; else echo "Welcome " . $_SESSION['username'];?></a></li>
          <li class="nav-item">
              <a class="nav-link" data-value="survey" href="surveys.php">Survey</a></li>
          <li class="nav-item">

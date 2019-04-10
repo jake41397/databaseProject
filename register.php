@@ -1,10 +1,14 @@
 <?php
 include("config.php");
 
-if(isset($_POST['email']) && !empty($_POST['email']) AND isset($_POST['password']) && !empty($_POST['password']))
+if(isset($_POST['regemail']) && !empty($_POST['regemail']) AND isset($_POST['regpassword']) && !empty($_POST['regpassword']))
 {
-$email = $_POST['email'];
-$password =  $_POST['password'];
+$email = $_POST['regemail'];
+$password =  $_POST['regpassword'];
+}
+else
+{
+  #header('Location: login.php');
 }
 
 $query = "SELECT * FROM users WHERE email = '$email'";
@@ -21,6 +25,8 @@ if($result->num_rows > 0)
       $url = $_SESSION['url'];
     else
       $url = "localhost/surveyToday/index.php";
+
+      #header('Location: login.php');
   }
   else
   {
@@ -66,5 +72,8 @@ if($result->num_rows > 0)
         $url = $_SESSION['url'];
       else
         $url = "localhost/surveyToday/index.php";*/
+    $_SESSION['loggedin'] = true;
+    $_SESSION['username'] = $email;
+    header('Location: index.php');
   }
 ?>

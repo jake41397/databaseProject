@@ -81,11 +81,11 @@
                <form method = "post" action = "">
                  <div class="form-group">
                     <label for="usr">Email:</label>
-                    <input type="text" name="email" value="" placeholder="Email" class="form-control" id="email">
+                    <input type="text" name="logemail" value="" placeholder="Email" class="form-control" id="logemail">
                   </div>
                   <div class="form-group">
                     <label for="pwd">Password:</label>
-                    <input type="password"  name="password" value="" placeholder="Password" class="form-control" id="pwd">
+                    <input type="password"  name="logpassword" value="" placeholder="Password" class="form-control" id="logpwd">
                   </div>
                   <button id="myBtn" name="commit" value="Login" >Submit</button>
               </form>
@@ -104,11 +104,11 @@
                 <h1>Sign Up: </h1>
                 <div class="form-group">
                    <label for="email">Email:</label>
-                   <input type="text" name="email" value="" placeholder="Email" class="form-control" id="email">
+                   <input type="text" name="regemail" value="" placeholder="Email" class="form-control" id="regemail">
                  </div>
                  <div class="form-group">
                    <label for="pwd">Password:</label>
-                   <input type="password" name="password" value="" placeholder="Password" class="form-control" id="pwd">
+                   <input type="password" name="regpassword" value="" placeholder="Password" class="form-control" id="regpwd">
                  </div>
                  <button id="signUp" name="commit" value="Register" >Submit</button>
                </form>
@@ -123,10 +123,12 @@
         </div>
 
          <script type ="text/javascript">
-            var pwd = document.getElementById("pwd");
-            var usr = document.getElementById("email");
+            var logpwd = document.getElementById("logpwd");
+            var logusr = document.getElementById("logemail");
+            var regpwd = document.getElementById("regpwd");
+            var regemail = document.getElementById("regemail");
 
-            pwd.addEventListener("keyup", function(event)
+            myBtn.addEventListener("keyup", function(event)
             {
               if (event.keyCode === 13)
               {
