@@ -33,7 +33,7 @@
          <li class="nav-item">
            <a class="nav-link " data-value="team" href="team.php">Team</a></li>
          <li class="nav-item">
-           <a class="nav-link " data-value="login"href="login.php">Login</a></li>
+           <a class="nav-link " data-value="login" <?php if($_SESSION['loggedin']) echo "href=logout.php"; else echo "href=login.php";?>><?php if($_SESSION['loggedin']) echo "Logout"; else echo "Login";?></a></li>
          </ul>
        </div>
      </nav>
@@ -43,10 +43,21 @@
        <div class="container">
          <div class="description ">
            <h1>Hello, Welcome To Our Official Website
-             <p>Start making your survey today!</p>
-             <button class="btn btn-outline-secondary btn-lg" onclick="location.href='login.php';">Sign Up</button>
-             <p></br>Or</p>
-             <button class="btn btn-outline-secondary btn-lg" onclick="location.href='login.php';">Log In</button>
+             <?php
+             if(!$_SESSION['loggedin'])
+             {
+               echo "<p>Start making your survey today!</p>
+                     <button class='btn btn-outline-secondary btn-lg' onclick=\"location.href='login.php';\">Sign Up</button>
+                      <p></br>Or</p>
+                      <button class='btn btn-outline-secondary btn-lg' onclick=\"location.href='login.php';\">Log In</button>";
+             }
+             else
+             {
+               echo "<p>Start making your survey today!</p>
+                    <button class='btn btn-outline-secondary btn-lg' onclick=\"location.href='surveys.php';\">Create Survey</button>";
+             }
+             ?>
+            
            </h1>
          </div>
        </div>

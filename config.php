@@ -7,6 +7,7 @@
 
    session_start(); // starts the session
    $_SESSION['url'] = $_SERVER['REQUEST_URI']; // i.e. "about.php"
+   $_SESSION['loggedin'] = false;
    
    // Check connection
    if ($db->connect_error)

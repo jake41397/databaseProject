@@ -6,7 +6,7 @@
       $myemail = $_POST['email'];
       $mypassword = $_POST['password'];
 
-      $sql = "SELECT email FROM u_login WHERE Email = '$myemail' AND Password = '$mypassword'";
+      $sql = "SELECT email FROM Users WHERE email = '$myemail' AND password = '$mypassword'";
       $result = mysqli_query($db,$sql);
       $count = mysqli_num_rows($result);
 
@@ -14,6 +14,7 @@
       {
         $_SESSION['loggedin'] = true;
         echo "Logged in!";
+        header('Location: index.php');
         //$_SESSION['loggedin'] = true;
         //$_SESSION['username'] = $myemail;
       }
@@ -113,6 +114,12 @@
                </form>
             </div>
           </div>
+          <?php
+                if(isset($msg))
+                {  // Check if $msg is not empty
+                    echo '<div class="statusmsg">'.$msg.'</div>'; // Display our message and wrap it with a div with the class "statusmsg".
+                }
+          ?>
         </div>
 
          <script type ="text/javascript">

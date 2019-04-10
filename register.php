@@ -7,10 +7,12 @@ $email = $_POST['email'];
 $password =  $_POST['password'];
 }
 
+$email = $_POST['email'];
+$password = $_POST['password'];
+
 $query = "SELECT email FROM Users WHERE email = '$email'";
 echo json_Encode($query);
 $result = mysqli_query($db,$query);
-
 
 if($result->num_rows > 0)
   {
@@ -27,7 +29,7 @@ if($result->num_rows > 0)
   {
     echo("<script>console.log('Attempting to insert into Users table and send email');</script>");
     $query = "INSERT INTO Users (email, password, hash, active) VALUES ('$email','$password', 0, false)";
-    $result = mysqli_query($db,$query);
+    $result = mysqli_query($db, $query);
     
     if (!$result)
     {
@@ -55,7 +57,7 @@ if($result->num_rows > 0)
 
     '; // Our message above including the link
 
-    $headers = 'From:noreply@yourwebsite.com' . "\r\n"; // Set from headers
+    $headers = 'From:noreply@dbsdatabase.com' . "\r\n"; // Set from headers
     mail($to, $subject, $message, $headers); // Send our email
 
       /*if($result)
