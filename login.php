@@ -78,7 +78,7 @@
           <div class="col-sm-6">
              <div class="description ">
                <h1>Login: </h1>
-               <form method = "post" action = "">
+               <form method = "post" action = "loginhelper.php">
                  <div class="form-group">
                     <label for="usr">Email:</label>
                     <input type="text" name="logemail" value="" placeholder="Email" class="form-control" id="logemail">
@@ -87,15 +87,15 @@
                     <label for="pwd">Password:</label>
                     <input type="password"  name="logpassword" value="" placeholder="Password" class="form-control" id="logpwd">
                   </div>
-                  <button id="myBtn" name="commit" value="Login" >Submit</button>
+                  <?php
+                  if(isset($_SESSION['loginmsg']))
+                  {  // Check if $msg is not empty
+                    echo '<div class="statusmsg">'.$_SESSION['loginmsg'].'</div>'; // Display our message and wrap it with a div with the class "statusmsg".
+                  }
+                  ?>
+                  <button id="logIn" name="commit" value="Login" >Submit</button>
               </form>
              </div>
-             <?php
-                if(isset($msg))
-                {  // Check if $msg is not empty
-                    echo '<div class="statusmsg">'.$msg.'</div>'; // Display our message and wrap it with a div with the class "statusmsg".
-                }
-             ?>
           </div>
 
           <div class="col-sm-6">
@@ -110,19 +110,21 @@
                    <label for="pwd">Password:</label>
                    <input type="password" name="regpassword" value="" placeholder="Password" class="form-control" id="regpwd">
                  </div>
+                 <?php
+                  if(isset($_SESSION['registermsg']))
+                  {  // Check if $msg is not empty
+                    echo '<div class="statusmsg">'.$_SESSION['registermsg'].'</div>'; // Display our message and wrap it with a div with the class "statusmsg".
+                  }
+                  ?>
                  <button id="signUp" name="commit" value="Register" >Submit</button>
                </form>
             </div>
           </div>
-          <?php
-                if(isset($msg))
-                {  // Check if $msg is not empty
-                    echo '<div class="statusmsg">'.$msg.'</div>'; // Display our message and wrap it with a div with the class "statusmsg".
-                }
-          ?>
         </div>
 
+        
          <script type ="text/javascript">
+         /*
             var logpwd = document.getElementById("logpwd");
             var logusr = document.getElementById("logemail");
             var regpwd = document.getElementById("regpwd");
@@ -136,6 +138,7 @@
                 document.getElementById("myBtn").click();
               }
             });
+          */
           </script>
        </div>
      </header>
