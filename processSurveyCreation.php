@@ -226,7 +226,7 @@
         $query = "INSERT INTO participant (SurveyId, Done) VALUES ('$surveyID', 0)";
         $result = mysqli_query($db, $query);
 
-        $partID - mysqli_insert_id($db);
+        $partID = mysqli_insert_id($db);
         $urlForSurvey = "https://dbsdatabase.com/takeSurvey?part=".$partID."&survey=".$surveyID;
 
         $to      = $emailList[$i]; // Send email to our user

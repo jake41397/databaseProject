@@ -1,4 +1,5 @@
-<?php session_start(); ?>
+<?php include("config.php"); ?>
+<script src="js/takeSurveyHelper.js" type="text/javascript"></script> 
 
 <!DOCTYPE html>
 <html lang="en">
@@ -43,285 +44,144 @@
       </br>
       </br>
 
-      <form method="post" action="" class="formbkg">
-      <label for="title">Title:</label>
-      <input type="text" name="title" value="" placeholder="Title" class="form-control" id="title">
+      <?php
+
+        if (isset($_GET['part']) && !empty($_GET['part']) AND isset($_GET['survey']) && !empty($_GET['survey']))
+        {
+            $partID = mysqli_escape_string($db,$_GET['part']);
+            $_SESSION['partID'] = $partID;
+
+            $surveyID = mysqli_escape_string($db, $_GET['survey']);
+            $_SESSION['surveyID'] = $surveyID;
+
+            // Make sure this is a valid participant (who hasn't already participated)
+            $query = "SELECT * FROM participant WHERE PartId='".$partID."' AND SurveyId='".$surveyID."' AND Done='0'";
+            $search = mysqli_query($db, $query);
+            $match = mysqli_num_rows($search);
+            $row = mysqli_fetch_assoc($search);
+
+            $_SESSION['validSurvey'] = false;
+
+            if ($row)
+            {
+                // get the questions for this survey
+                $query = "SELECT * FROM questions WHERE SurveyId='$surveyID' ORDER BY QuestionId ASC";
+                $search = mysqli_query($db, $query);
+                $numQuestions = mysqli_num_rows($search);
+
+                $i = 1;
+
+                // Loop through the rows returned by the search
+                while ($row = mysqli_fetch_assoc($search))
+                {
+                    // Store the question type and question text in session variables
+                    $_SESSION['q'.$i.'Type'] = $row['Type'];
+                    $_SESSION['q'.$i.''] = $row['QuestDes'];
+
+                    $i++;
+                }
+
+                $search = mysqli_query($db, "SELECT * FROM survey WHERE SurveyId='$surveyID'");
+
+                // If it is a valid survey ID
+                if ($row = mysqli_fetch_assoc($search))
+                {
+                    $_SESSION['SurveyName'] = $row['SurvName'];
+                    $_SESSION['SurveyDesc'] = $row['Description'];
+
+                    if (!$row['IsOpen'])
+                    {
+                        echo '<div class="statusmsg">This survey has concluded.</div>';
+                    }
+                    else
+                    {
+                        $_SESSION['validSurvey'] = true;
+                    }
+                }
+
+                // update this participant to reflect that they have just participated (set done to true)
+                //mysqli_query($db, "UPDATE participant SET Done='1' WHERE PartId='".$partID."' AND SurveyId='".$surveyID."' AND Done='0'");   
+            }
+            else
+            {
+                echo '<div class="statusmsg">This is not a valid survey link.</div>';
+                exit;
+            }
+        }
+        else
+        {
+            exit;
+        }
+      ?>
+
+      <form method="post" action="index.php" class="formbkg">
+      <label for="title">Survey:</label>
+      <p><?php if ($_SESSION['validSurvey']) echo $_SESSION['SurveyName']; else echo "This is not a valid survey link.";?></p>
       <hr></hr>
 
-      <label for="descript">Description</label>
-      <textarea rows="4" cols="50" name="descript" value ="" class="form-control" id="descript"></textarea>
-      </br>
-      <hr></hr>
-
-      <label for="start">Start Date</label>
-      <input type="date" id="start" name="surveyStart" value="2019-03-18"  min="2019-03-18" max="2020-12-31">
-      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-      <label for="end">End Date</label>
-      <input type="date" id="end" name="surveyEnd" value="2019-03-18"  min="2019-03-18" max="2020-12-31">
-      </br>
-      <hr></hr>
-
-      <p>Email List</p>
-      <textarea name="emaillist" id="emaillist" rows="2" cols="50"></textarea>
+      <label for="descript">Description:</label>
+      <p><?php if ($_SESSION['validSurvey']) echo $_SESSION['SurveyDesc']; else echo "This is not a valid survey link.";?></p>
        <hr></hr>
-           <p>Question 1</p>
-           <div class="form-group">
-            <select class="form-control" id="sel1" onchange="myFunction(this.value, 1)">
-              <option value="">--Pick Question Type--</option>
-              <option value="1">Multiple Choice</option>
-              <option value="2">Long Answer</option>
-            </select>
+          <div id="form_sample1">
+            <?php
+                if (isset($_SESSION['q1Type']))
+                {
+                    echo "<script>
+                    myFunction(".$_SESSION['q1Type'].", ".json_encode($_SESSION['q1']).", 1);
+                    </script>";
+                }
+            ?>
           </div>
-
-          <div id="form_sample1"></div>
-          
-          <hr></hr>
-          <p>Question 2</p>
-          <div class="form-group">
-           <select class="form-control" id="sel1" onchange="myFunction(this.value, 2)">
-             <option value="">--Pick Question Type--</option>
-             <option value="1">Multiple Choice</option>
-             <option value="2">Long Answer</option>
-           </select>
-         </div>
-
-         <div id="form_sample2"></div>
-
-         <hr></hr>
-         <p align="center">Question 3</p>
-         <div class="form-group">
-          <select class="form-control" id="sel1" onchange="myFunction(this.value, 3)">
-            <option value="">--Pick Question Type--</option>
-            <option value="1">Multiple Choice</option>
-            <option value="2">Long Answer</option>
-          </select>
-        </div>
-
-        <div id="form_sample3"></div>
-        
         <hr></hr>
-        <p>Question 4</p>
-        <div class="form-group">
-         <select class="form-control" id="sel1" onchange="myFunction(this.value, 4)">
-           <option value="">--Pick Question Type--</option>
-           <option value="1">Multiple Choice</option>
-           <option value="2">Long Answer</option>
-         </select>
+          <div id="form_sample2">
+            <?php
+                if (isset($_SESSION['q2Type']))
+                {
+                    echo "<script>
+                    myFunction(".$_SESSION['q2Type'].", ".json_encode($_SESSION['q2']).", 2);
+                    </script>";
+                }
+            ?>
+          </div>
+        <hr></hr>
+          <div id="form_sample3">  
+             <?php
+                if (isset($_SESSION['q3Type']))
+                {
+                    echo "<script>
+                    myFunction(".$_SESSION['q3Type'].", ".json_encode($_SESSION['q3']).", 3);
+                    </script>";
+                }
+            ?>
+          </div>
+        <hr></hr>
+          <div id="form_sample4">
+            <?php
+                if (isset($_SESSION['q4Type']))
+                {
+                    echo "<script>
+                    myFunction(".$_SESSION['q4Type'].", ".json_encode($_SESSION['q4']).", 4);
+                    </script>";
+                }
+            ?>
+          </div>
+        <hr></hr>
+          <div id="form_sample5">
+            <?php
+                if (isset($_SESSION['q5Type']))
+                {
+                    echo "<script>
+                    myFunction(".$_SESSION['q5Type'].", ".json_encode($_SESSION['q5']).", 5);
+                    </script>";
+                }
+            ?>
+          </div>
+        <hr></hr>
+        <input type="submit" value="Submit">
+       </br>
+       </br>
+       </form>
        </div>
-
-       <div id="form_sample4"></div>
-       <hr></hr>
-       <p>Question 5</p>
-       <div class="form-group">
-        <select class="form-control" id="sel1" onchange="myFunction(this.value, 5)">
-          <option value="">--Pick Question Type--</option>
-          <option value="1">Multiple Choice</option>
-          <option value="2">Long Answer</option>
-        </select>
-      </div>
-
-      <div id="form_sample5"></div>
-      <hr></hr>
-      <input type="submit" value="Create Survey">
-    </br>
-    </br>
-  </form>
-  </div>
-
-          <script>
-              function myFunction(value, question)
-              {
-                var x = value;
-
-                if(x == 0)
-                {
-                  if ( $('#form_sample' + question).text().length == 0 )
-                  {
-
-                  }
-                  else
-                  {
-                    $('#form_sample' + question).empty();
-                  }
-                }
-                else if(x == 1)
-                {
-                  if ( $('#form_sample' + question).text().length == 0 )
-                  {
-                    
-
-                    // Fetching HTML Elements in Variables by ID.
-                    var x = document.getElementById("form_sample" + question);
-                    var createform = document.createElement('form'); // Create New Element Form
-                    createform.setAttribute("action", ""); // Setting Action Attribute on Form
-                    createform.setAttribute("method", "post"); // Setting Method Attribute on Form
-                    x.appendChild(createform);
-                    
-                    //var line = document.createElement('hr'); // Giving Horizontal Row Before Heading
-                    //createform.appendChild(line);
-
-                  /*  var heading = document.createElement('h2'); // Heading of Form
-                    heading.innerHTML = "Contact Form ";
-                    createform.appendChild(heading);*/
-
-                    var linebreak = document.createElement('br');
-                    createform.appendChild(linebreak);
-
-                    var questionlabel = document.createElement('label'); // Create Label for Name Field
-                    questionlabel.innerHTML = "Question : "; // Set Field Labels
-                    createform.appendChild(questionlabel);
-
-                    var inputelement = document.createElement('input'); // Create Input Field for Name
-                    inputelement.setAttribute("type", "text");
-                    inputelement.setAttribute("name", "dname");
-                    createform.appendChild(inputelement);
-
-                    var linebreak = document.createElement('br');
-                    createform.appendChild(linebreak);
-
-                    var messagelabel = document.createElement('label'); // Append Textarea
-                    messagelabel.innerHTML = "Answer : ";
-                    createform.appendChild(messagelabel);
-
-                    //var linebreak2 = document.createElement('br');
-                    //createform.appendChild(linebreak2);
-
-                    var divForRadioSelect = document.createElement('div');
-                    createform.appendChild(divForRadioSelect);
-
-                    var radiolabel1 = document.createElement('label');
-                    radiolabel1.setAttribute("for", "rating1");
-                    radiolabel1.innerHTML = "Strongly Disagree&nbsp;";
-                    divForRadioSelect.appendChild(radiolabel1);
-
-                    var radioelement = document.createElement('input');
-                    radioelement.setAttribute("id", "rating1");
-                    radioelement.setAttribute("type", "radio");
-                    radioelement.setAttribute("value", "1");
-                    radioelement.setAttribute("name", "radioGroup");
-                    divForRadioSelect.appendChild(radioelement);
-
-                    var radiolabel2 = document.createElement('label');
-                    radiolabel2.setAttribute("for", "rating2");
-                    radiolabel2.innerHTML = "&nbsp;&nbsp;&nbsp;Disagree&nbsp";
-                    divForRadioSelect.appendChild(radiolabel2);
-
-                    var radioelement2 = document.createElement('input');
-                    radioelement2.setAttribute("id", "rating2");
-                    radioelement2.setAttribute("type", "radio");
-                    radioelement2.setAttribute("value", "2");
-                    radioelement2.setAttribute("name", "radioGroup");
-                    divForRadioSelect.appendChild(radioelement2);
-
-                    var radiolabel3 = document.createElement('label');
-                    radiolabel3.setAttribute("for", "rating3");
-                    radiolabel3.innerHTML = "&nbsp;&nbsp;&nbsp;Neutral&nbsp";
-                    divForRadioSelect.appendChild(radiolabel3);
-
-                    var radioelement3 = document.createElement('input');
-                    radioelement3.setAttribute("id", "rating3");
-                    radioelement3.setAttribute("type", "radio");
-                    radioelement3.setAttribute("value", "3");
-                    radioelement3.setAttribute("name", "radioGroup");
-                    divForRadioSelect.appendChild(radioelement3);
-
-                    var radiolabel4 = document.createElement('label');
-                    radiolabel4.setAttribute("for", "rating3");
-                    radiolabel4.innerHTML = "&nbsp;&nbsp;&nbsp;Agree&nbsp";
-                    divForRadioSelect.appendChild(radiolabel4);
-
-                    var radioelement4 = document.createElement('input');
-                    radioelement4.setAttribute("id", "rating4");
-                    radioelement4.setAttribute("type", "radio");
-                    radioelement4.setAttribute("value", "4");
-                    radioelement4.setAttribute("name", "radioGroup");
-                    divForRadioSelect.appendChild(radioelement4);
-
-                    var radiolabel5 = document.createElement('label');
-                    radiolabel5.setAttribute("for", "rating5");
-                    radiolabel5.innerHTML = "&nbsp;&nbsp;&nbsp;Strongly Agree&nbsp";
-                    divForRadioSelect.appendChild(radiolabel5);
-
-                    var radioelement5 = document.createElement('input');
-                    radioelement5.setAttribute("id", "rating5");
-                    radioelement5.setAttribute("type", "radio");
-                    radioelement5.setAttribute("value", "5");
-                    radioelement5.setAttribute("name", "radioGroup");
-                    divForRadioSelect.appendChild(radioelement5);
-
-                    divForRadioSelect.appendChild(linebreak2);
-
-                    var messagebreak = document.createElement('br');
-                    createform.appendChild(messagebreak);
-
-                    /*var submitelement = document.createElement('input'); // Append Submit Button
-                    submitelement.setAttribute("type", "submit");
-                    submitelement.setAttribute("name", "dsubmit");
-                    submitelement.setAttribute("value", "Submit");
-                    createform.appendChild(submitelement);*/
-
-                    x.insertBefore(createform, x.childNodes[0]);
-                  }
-                  else
-                  {
-                    $('#form_sample' + question).empty();
-                    myFunction(value, question);
-                  }
-                }
-                else if (x == 2)
-                {
-                  if ( $('#form_sample' + question).text().length == 0 )
-                  {
-                    // Fetching HTML Elements in Variables by ID.
-                    var x = document.getElementById("form_sample" + question);
-                    var createform = document.createElement('form'); // Create New Element Form
-                    createform.setAttribute("action", ""); // Setting Action Attribute on Form
-                    createform.setAttribute("method", "post"); // Setting Method Attribute on Form
-                    x.appendChild(createform);
-
-                    var line = document.createElement('hr'); // Giving Horizontal Row After Heading
-                    createform.appendChild(line);
-
-                    var linebreak = document.createElement('br');
-                    createform.appendChild(linebreak);
-
-                    var questionlabel = document.createElement('label'); // Create Label for Name Field
-                    questionlabel.innerHTML = "Question : "; // Set Field Labels
-                    createform.appendChild(questionlabel);
-
-                    var inputelement = document.createElement('input'); // Create Input Field for Name
-                    inputelement.setAttribute("type", "text");
-                    inputelement.setAttribute("name", "dname");
-                    inputelement.setAttribute("size", "42");
-                    createform.appendChild(inputelement);
-
-                    var linebreak = document.createElement('br');
-                    createform.appendChild(linebreak);
-
-                    var messagelabel = document.createElement('label'); // Append Textarea
-                    messagelabel.innerHTML = "Answer : ";
-                    createform.appendChild(messagelabel);
-
-                    var texareaelement = document.createElement('textarea');
-                    texareaelement.setAttribute("name", "dmessage");
-                    texareaelement.setAttribute("maxlength", "200");
-                    texareaelement.setAttribute("cols", "45");
-                    texareaelement.setAttribute("rows", "3");
-                    createform.appendChild(texareaelement);
-
-                    //var messagebreak = document.createElement('br');
-                    //createform.appendChild(messagebreak);
-
-                    x.insertBefore(createform, x.childNodes[0]);
-                  }
-                  else
-                  {
-                    $('#form_sample' + question).empty();
-                    myFunction(value, question);
-                  }
-                }
-              }
-          </script>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <script src="js/bootstrap.min.js"></script>

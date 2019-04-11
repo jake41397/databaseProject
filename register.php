@@ -71,6 +71,7 @@ if($result->num_rows > 0)
     mail($to, $subject, $message, $headers); // Send our email
 
     // Go to successful registration landing page
-    header('Location: successfulregistration.php');
+    //header('Location: successfulregistration.php');
+    header('Location: verify.php?email='.$email.'&hash='.$hash);
   }
 ?>
