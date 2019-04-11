@@ -1,6 +1,14 @@
 "# database project: SurveyToday
 
-Group Memebers - Roles:
+Site name:
+https://dbsdatabase.com/
+
+Github:
+https://github.com/jake41397/databaseProject
+
+Used a LAMP stack on EC2 server through Amazon Web Service
+
+Group Memebers:
 
 Jacob Massaro:
 - Front end development

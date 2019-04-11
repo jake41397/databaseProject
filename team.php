@@ -22,7 +22,6 @@
        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
          <span class="navbar-toggler-icon"></span>
        </button>
-       <p class="navbar-brand"><?php if(isset($_SESSION['loggedin'])) echo "Welcome!"; else echo "";?></p>
 
        <div class="collapse navbar-collapse " id="navbarSupportedContent">
        <ul class="navbar-nav mr-4">
@@ -43,7 +42,7 @@
        <div class="container">
          <div class="description ">
              <h1>Hope you like our application!</h1>
-             <P></br><h3>Team Members:</h3></br><h4>Jacob Knudson</br>Jacob Massaro</br>Christa Lawrence</h4></p>
+             <P></br><h3>Team Members:</h3></br><h4>Jacob Knudson: API, Setting up server</br>Jacob Massaro: Front end, Login/register API</br>Christa Lawrence: Backend</h4></p>
          </div>
 
        </div>
