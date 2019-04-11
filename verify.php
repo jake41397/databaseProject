@@ -1,4 +1,4 @@
-<?php session_start();?>
+<?php include("config.php"); ?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -44,16 +44,30 @@
          <div class="description ">
            <h1>Thank you for signing up!
              <?php
-             if(!isset($_SESSION['loggedin']))
+             if (isset($_GET['email']) && !empty($_GET['email']) AND isset($_GET['hash']) && !empty($_GET['hash']))
              {
-               echo "<h4></br>A verification email has been sent to your email address.</h4></br><h4>Please click the link in the email to validate your account.</br></br></h4>
-                      <button class='btn btn-outline-secondary btn-lg' onclick=\"location.href='login.php';\">Log In</button>";
+                 $email = mysqli_escape_string($_GET['email']);
+                 $hash = mysqli_escape_string($_GET['hash']);
+
+                 $search = mysqli_query("SELECT * FROM users WHERE email='".$email."' AND hash='".$hash."' AND active='0'");
+                 $match = mysql_num_rows($search);
+
+                 if ($match > 0)
+                 {
+                     // We have a match, activate the account
+                     mysqli_query("UPDATE users SET active='1' WHERE email='".$email."' AND hash='".$hash."' AND active='0'");
+                     echo '<div class="statusmsg">Your account has been activated, you can now login</div>';
+                 }
+                 else
+                 {
+                    echo '<div class="statusmsg">This is not a valid verification link.</div>';
+                 }
              }
              else
              {
-               echo "<p>Start making your survey today!</p>
-                    <button class='btn btn-outline-secondary btn-lg' onclick=\"location.href='surveys.php';\">Create Survey</button>";
+                echo '<div class="statusmsg">This is not a valid verification link.</div>';
              }
+
              ?>
             
            </h1>

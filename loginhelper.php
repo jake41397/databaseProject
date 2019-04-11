@@ -17,7 +17,6 @@
       $row = mysqli_fetch_array($result,MYSQLI_ASSOC);
       $active = $row['active'];
       $userID = $row['UserId'];
-      $active = !$active;
       $count = mysqli_num_rows($result);
 
       if($count == 1)

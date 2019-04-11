@@ -36,7 +36,8 @@ if($result->num_rows > 0)
   else
   {
     echo("<script>console.log('Attempting to insert into Users table and send email');</script>");
-    $query = "INSERT INTO users (email, password, hash, active) VALUES ('$email','$password', 0, 0)";
+    $hash = md5( rand(0,1000) ); // Generate random 32 character hash and assign it to a local variable.
+    $query = "INSERT INTO users (email, password, hash, active) VALUES ('$email','$password', '$hash', 0)";
     $result = mysqli_query($db, $query);
     
     if (!$result)
@@ -61,7 +62,7 @@ if($result->num_rows > 0)
     ------------------------
 
     Please click this link to activate your account:
-    https://dbsdatabase.com/verify.php?email='.$email.'
+    https://dbsdatabase.com/verify.php?email='.$email.'&hash='.$hash.'
 
     '; // Our message above including the link
 
