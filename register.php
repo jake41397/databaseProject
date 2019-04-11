@@ -8,6 +8,7 @@ if(isset($_POST['regemail']) && !empty($_POST['regemail']) AND isset($_POST['reg
 {
   $email = $_POST['regemail'];
   $password =  $_POST['regpassword'];
+  $plainPassword = $password;
   $password = md5($password);
 }
 else
@@ -58,7 +59,7 @@ if($result->num_rows > 0)
 
     ------------------------
     Username: '.$email.'
-    Password: '.$password.'
+    Password: '.$plainPassword.'
     ------------------------
 
     Please click this link to activate your account:

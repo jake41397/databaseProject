@@ -46,16 +46,16 @@
              <?php
              if (isset($_GET['email']) && !empty($_GET['email']) AND isset($_GET['hash']) && !empty($_GET['hash']))
              {
-                 $email = mysqli_escape_string($_GET['email']);
-                 $hash = mysqli_escape_string($_GET['hash']);
+                 $email = mysqli_escape_string($db,$_GET['email']);
+                 $hash = mysqli_escape_string($db, $_GET['hash']);
 
-                 $search = mysqli_query("SELECT * FROM users WHERE email='".$email."' AND hash='".$hash."' AND active='0'");
-                 $match = mysql_num_rows($search);
+                 $search = mysqli_query($db, "SELECT * FROM users WHERE email='".$email."' AND hash='".$hash."' AND active='0'");
+                 $match = mysqli_num_rows($search);
 
                  if ($match > 0)
                  {
                      // We have a match, activate the account
-                     mysqli_query("UPDATE users SET active='1' WHERE email='".$email."' AND hash='".$hash."' AND active='0'");
+                     mysqli_query($db, "UPDATE users SET active='1' WHERE email='".$email."' AND hash='".$hash."' AND active='0'");
                      echo '<div class="statusmsg">Your account has been activated, you can now login</div>';
                  }
                  else
