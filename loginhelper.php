@@ -9,6 +9,7 @@
       // email and password sent from form
       $myemail = mysqli_real_escape_string($db,$_POST['logemail']);
       $mypassword = mysqli_real_escape_string($db,$_POST['logpassword']);
+      $mypassword = md5($mypassword);
 
       $sql = "SELECT * FROM users WHERE email = '$myemail' AND password = '$mypassword'";
       echo("<script>console.log(". json_encode($sql). ");</script>");

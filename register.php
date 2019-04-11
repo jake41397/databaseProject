@@ -8,6 +8,7 @@ if(isset($_POST['regemail']) && !empty($_POST['regemail']) AND isset($_POST['reg
 {
   $email = $_POST['regemail'];
   $password =  $_POST['regpassword'];
+  $password = md5($password);
 }
 else
 {
