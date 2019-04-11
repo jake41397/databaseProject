@@ -42,7 +42,7 @@
        <div class="container">
          <div class="description ">
              <h1>Hope you like our application!</h1>
-             <P></br><h3>Team Members:</h3></br><h4>Jacob Knudson: API, Viewing survey front end</br>Jacob Massaro: Front end, Login/register API</br>Christa Lawrence: Backend</h4></p>
+             <P></br><h3>Team Members:</h3></br><h4>Jacob Knudson: API, Setting up server</br>Jacob Massaro: Front end, Login/register API</br>Christa Lawrence: Backend</h4></p>
          </div>
 
        </div>
