@@ -18,7 +18,7 @@ Christa Lawrence:
 - Backend development
 
 Jacob Knudson:
-- Setting up server
+- Setting up server through AWS
 - API
-
+- Front end development
 " 
