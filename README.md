@@ -1,5 +1,9 @@
 "# database project: SurveyToday
 
+Site name:
+https://dbsdatabase.com/
+Used a LAMP stack on EC2 server through Amazon Web Service
+
 Group Memebers - Roles:
 
 Jacob Massaro:
