@@ -6,8 +6,8 @@ $_SESSION['registermsg'] = "";
 
 if(isset($_POST['regemail']) && !empty($_POST['regemail']) AND isset($_POST['regpassword']) && !empty($_POST['regpassword']))
 {
-$email = $_POST['regemail'];
-$password =  $_POST['regpassword'];
+  $email = $_POST['regemail'];
+  $password =  $_POST['regpassword'];
 }
 else
 {
