@@ -1,4 +1,22 @@
-<?php session_start(); ?>
+<?php include("config.php"); ?>
+  /*
+  $count = mysqli_num_rows($result);
+
+  if ($count > 0)
+  {
+    while ($row = mysqli_fetch_array($result))
+    {
+      $survey_name = $row['SurvName'];
+      $survey_desc = $row['Description'];
+      $survey_isOpen = $row['IsOpen'];
+      $survey_start = $row['Start'];
+      $survey_end = $row['End'];
+
+      // Append this survey to the list
+      $survey_list .= 
+    }
+  }
+  */
 
 <!DOCTYPE html>
 <html lang="en">
@@ -42,12 +60,52 @@
        <div class="overlay"></div>
        <div class="container">
          <div class="description ">
-           <h1>View Your Surveys Here:
-             <p>Start making your survey today!</p>
+           <h1>Your Surveys</br><hr></hr>
+             <table>
+        <thead>
+            <tr>
+                <td><h3>Active&nbsp&nbsp|&nbsp&nbsp</h3></td>
+                <td><h3>Name&nbsp&nbsp|&nbsp&nbsp</h3></td>
+                <td><h3>Description&nbsp&nbsp|&nbsp&nbsp</h3></td>
+                <td><h3>Start Date&nbsp&nbsp|&nbsp&nbsp</h3></td>
+                <td><h3>End Date&nbsp&nbsp|&nbsp&nbsp</h3></td>
+            </tr>
+        </thead>
+        <tbody>
+        <?php
+
+        $survey_list = "";
+        $userID = $_SESSION['userID'];
+        $result = mysqli_query($db, "SELECT * FROM survey WHERE UserId = '$userID' ORDER BY SurveyId DESC");
+        
+        if (!$result)
+        {
+          $survey_list="You have not created any surveys";
+          exit;
+        }
+            while($row = mysqli_fetch_array($result)) 
+            {
+            ?>
+                <tr>
+                    <td><?php if ($row['IsOpen'] == 1) echo "Open"; else echo "Closed";?></td>
+                    <td><?php echo "<a href=\"viewThisSurvey.php?user=".$userID."&survey=".$row['SurveyId']."\">".$row['SurvName']."</a>";?></td>
+                    <td><?php echo $row['Description']?></td>
+                    <td><?php echo $row['Start']?></td>
+                    <td><?php echo $row['End']?></td>
+                </tr>
+
+            <?php
+            }
+            ?>
+            </tbody>
+       </table>
+            <?php echo $survey_list; ?>
            </h1>
          </div>
        </div>
      </header>
+
+     
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <script src="js/bootstrap.min.js"></script>

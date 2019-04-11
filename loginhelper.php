@@ -15,6 +15,7 @@
       $result = mysqli_query($db,$sql);
       $row = mysqli_fetch_array($result,MYSQLI_ASSOC);
       $active = $row['active'];
+      $userID = $row['UserId'];
       $active = !$active;
       $count = mysqli_num_rows($result);
 
@@ -31,6 +32,7 @@
         // Log the user in
         $_SESSION['username'] = $myemail;
         $_SESSION['loggedin'] = true;
+        $_SESSION['userID'] = $userID;
         header("Location: index.php");
         exit;
       }

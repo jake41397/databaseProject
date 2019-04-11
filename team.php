@@ -41,11 +41,9 @@
      <header class="header">
        <div class="overlay"></div>
        <div class="container">
-
          <div class="description ">
-           <h1>We Are A Passionate Team Of Computer Scientists
-             <p>Hope you like our application!</p>
-           </h1>
+             <h1>Hope you like our application!</h1>
+             <P></br><h3>Team Members:</h3></br><h4>Jacob Knudson</br>Jacob Massaro</br>Christa Lawrence</h4></p>
          </div>
 
        </div>

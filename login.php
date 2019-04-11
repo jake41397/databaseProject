@@ -6,14 +6,12 @@
       $myemail = $_POST['email'];
       $mypassword = $_POST['password'];
 
-      $sql = "SELECT email FROM Users WHERE email = '$myemail' AND password = '$mypassword'";
+      $sql = "SELECT * FROM Users WHERE email = '$myemail' AND password = '$mypassword'";
       $result = mysqli_query($db,$sql);
       $count = mysqli_num_rows($result);
 
       if($count == 1)
       {
-        $_SESSION['loggedin'] = true;
-        echo "Logged in!";
         header('Location: index.php');
         $_SESSION['loggedin'] = true;
         $_SESSION['username'] = $myemail;

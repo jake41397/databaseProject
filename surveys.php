@@ -47,13 +47,15 @@
          <div class="description ">
             <h1>Would You Like To Do?</h1>
           </div>
+          </br>
+          </br>
         </div>
      <!-- Survey Boxes Section -->
      <div class="surveybox">
        <div class="container">
          <div class="row">
            <div class="col-lg-3 col-md-3 col-sm-12 item">
-             <a href=<?php if(isset($_SESSION['loggedin'])) echo "surveyPage.php"; else echo "login.php";?>>
+             <a href=<?php if(isset($_SESSION['loggedin'])) echo "createSurvey.php"; else echo "login.php";?>>
               <img src="images/createSurveyBox.jpg" class="img-fluid" alt="Create">
               <div class="des">Create a Survey</div>
               <!-- <span class="text-muted">Create</span> -->
