@@ -48,7 +48,7 @@ if($result->num_rows > 0)
     }
 
     $to      = $email; // Send email to our user
-    $subject = 'Signup | Verification'; // Give the email a subject
+    $subject = 'SurveyToday | Sign-Up Verification'; // Give the email a subject
     $message = '
 
     Thanks for signing up!
@@ -66,21 +66,8 @@ if($result->num_rows > 0)
 
     $headers = 'From:noreply@dbsdatabase.com' . "\r\n"; // Set from headers
     mail($to, $subject, $message, $headers); // Send our email
-  
-    echo '<script language="javascript">';
-    echo 'alert("Verification email has been sent.")';  //not showing an alert box.
-    echo '</script>';
 
-      /*if($result)
-        echo "YOUR REGISTRATION IS COMPLETED...";
-      else
-        echo "Unknown Error!";
-
-      if(isset($_SESSION['url']))
-        $url = $_SESSION['url'];
-      else
-        $url = "localhost/surveyToday/index.php";*/
-
+    // Go to successful registration landing page
     header('Location: successfulregistration.php');
   }
 ?>

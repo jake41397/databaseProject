@@ -220,6 +220,30 @@
         $result = mysqli_query($db, $query);
     }
 
+    // Create participants for this survey
+    for($i = 0; $i < count($emailList); $i++)
+    {
+        $query = "INSERT INTO participant (SurveyId, Done) VALUES ('$surveyID', 0)";
+        $result = mysqli_query($db, $query);
+
+        $partID - mysqli_insert_id($db);
+        $urlForSurvey = "https://dbsdatabase.com/takeSurvey?part=".$partID."&survey=".$surveyID;
+
+        $to      = $emailList[$i]; // Send email to our user
+        $subject = 'SurveyToday | Survey Invitation'; // Give the email a subject
+        $message = '
+
+        You have been invited to participate in an anonymous survey.
+
+        Please click this link to participate anonymously:
+        '.$urlForSurvey.'
+
+        '; // Our message above including the link
+
+        $headers = 'From:noreply@dbsdatabase.com' . "\r\n"; // Set from headers
+        mail($to, $subject, $message, $headers); // Send our email
+    }
+
     header("Location: viewSurvey.php");
     exit;
 ?>
