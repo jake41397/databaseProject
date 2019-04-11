@@ -52,8 +52,15 @@
       <label for="start">Start Date</label>
       <input type="date" id="start" name="surveyStart" value="2019-03-18"  min="2019-03-18" max="2020-12-31">
 
-      <label for="start">End Date</label>
+      <label for="end">End Date</label>
       <input type="date" id="end" name="surveyEnd" value="2019-03-18"  min="2019-03-18" max="2020-12-31">
+
+      </br>
+      </br>
+      </br>
+      
+      <label for="emaillist">Email List</label>
+      <textarea name="emaillist" id="emaillist" rows="2" cols="50"></textarea>
 
        </br>
        </br>
